@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圣经经文</title>
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.2);
+            --text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://yaodu.obs.cn-north-4.myhuaweicloud.com/img/WX20250208-005045%402x.png') center/cover fixed;
+        }
+
+        .container {
+            max-width: 80%;
+            color: white;
+            font-family: 'Georgia', serif;
+            text-shadow: var(--text-shadow);
+            animation: fadeIn 1s ease-in;
+            text-align: center;
+        }
+
+        h1 {
+            font-style: italic;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        #quote {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin: 1rem 0;
+            min-height: 60px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .button, .select-box {
+            padding: 12px 25px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 25px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .button:hover, .select-box:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .select-box {
+            appearance: none;
+            text-align: center;
+        }
+
+
+        @media (max-width: 480px) {
+            .container {
+                max-width: 95%;
+            }
+            
+            .button, .select-box {
+                padding: 10px 20px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="verse">经文标题</h1>
+        <p id="quote">经文内容</p>
+        <div class="buttons">
+            <select id="languageSelect" class="select-box" onchange="changeLanguage()">
+                <option value="ar">عربي</option>
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+                <option value="zh">中文</option>
+            </select>
+            <button class="button" onclick="readAloud()"> 朗读 🔊 </button>
+        </div>
+    </div>
+
+    <script>
+        const verses = [{
+            zh: { verse: "约翰福音 10:11", quote: "我是好牧人，好牧人为羊舍命。" },
+            en: { verse: "John 10:11", quote: "I am the good shepherd. The good shepherd lays down his life for the sheep." },
+            fr: { verse: "Jean 10:11", quote: "Je suis le bon berger. Le bon berger donne sa vie pour ses brebis." },
+            ar: { verse: "يوحنا ١٠:١١", quote: "أنا هو الراعي الصالح، والراعي الصالح يبذل نفسه عن الخراف." }
+        }];
+
+        let currentLang = 'ar';
+        let currentVerse = verses[Math.floor(Math.random() * verses.length)];
+
+        let synth = window.speechSynthesis;
+
+        function updateContent() {
+            const verseStr = currentVerse[currentLang];
+            document.getElementById('verse').textContent = verseStr.verse;
+            document.getElementById('quote').textContent = verseStr.quote;
+        }
+
+        function changeLanguage() {
+            currentLang = document.getElementById('languageSelect').value;
+            updateContent();
+            updateButtonLabel();
+        }
+
+        function updateButtonLabel() {
+            const button = document.querySelector(".button");
+            const labels = {
+                zh: "朗读 🔊",
+                en: "Read Aloud 🔊",
+                fr: "Lire à haute voix 🔊",
+                ar: "اقرأ بصوت عالٍ 🔊"
+            };
+            button.textContent = labels[currentLang];
+        }
+        function readAloud() {
+            let msg = new SpeechSynthesisUtterance(document.getElementById("quote").innerText);
+            msg.lang = { zh: 'zh-CN', en: 'en-US', fr: 'fr-FR', ar: 'ar-SA' }[currentLang];
+
+            let voices = speechSynthesis.getVoices();
+            msg.voice = voices.find(voice => voice.lang === msg.lang) || voices[0];
+
+            speechSynthesis.speak(msg);
+        }
+
+        if (synth.onvoiceschanged !== undefined) {
+            synth.onvoiceschanged = () => console.log('Voices loaded:', synth.getVoices());
+        }
+
+        updateContent();
+        updateButtonLabel();
+    </script>
+</body>
+</html>

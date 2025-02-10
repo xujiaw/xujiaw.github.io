@@ -173,7 +173,7 @@
             const verseStr = currentVerse[currentLang];
             var title = verseStr.verse;
             const audioPlayer = document.getElementById("audioPlayer");
-            audioPlayer.src = title + ".mp3";
+            audioPlayer.src = "./" + title + ".mp3";
             audioPlayer.play()
                 .then(() => console.log("播放成功"))
                 .catch(error => console.error("播放失败", error));

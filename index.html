@@ -10,6 +10,9 @@
             --text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
 
+        p {
+            white-space: pre-line;
+        }
         body {
             margin: 0;
             padding: 0;
@@ -97,6 +100,7 @@
     </style>
 </head>
 <body>
+    <audio id="audioPlayer"></audio>
     <div class="container">
         <h1 id="verse">经文标题</h1>
         <p id="quote">经文内容</p>
@@ -113,11 +117,23 @@
 
     <script>
         const verses = [{
-            zh: { verse: "约翰福音 10:11", quote: "我是好牧人，好牧人为羊舍命。" },
-            en: { verse: "John 10:11", quote: "I am the good shepherd. The good shepherd lays down his life for the sheep." },
-            fr: { verse: "Jean 10:11", quote: "Je suis le bon berger. Le bon berger donne sa vie pour ses brebis." },
-            ar: { verse: "يوحنا ١٠:١١", quote: "أنا هو الراعي الصالح، والراعي الصالح يبذل نفسه عن الخراف." }
-        }];
+    "zh": {
+      "verse": "Al-Fatihah：1-2",
+      "quote": "奉至仁至慈的真主之名。\n一切赞颂，全归真主，全世界的主。"
+    },
+    "en": {
+      "verse": "Al-Fatihah：1-2",
+      "quote": "In the name of Allah, the Most Gracious, the Most Merciful.\nAll praise is due to Allah, the Lord of all the worlds."
+    },
+    "fr": {
+      "verse": "Al-Fatihah：1-2",
+      "quote": "Au nom d'Allah, le Tout Miséricordieux, le Très Miséricordieux.\nLouange à Allah, Seigneur de l'univers."
+    },
+    "ar": {
+      "verse": "Al-Fatihah：1-2",
+      "quote": "بِسْمِ اللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ\nالْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ"
+    }
+  }];
 
         let currentLang = 'ar';
         let currentVerse = verses[Math.floor(Math.random() * verses.length)];
@@ -147,13 +163,20 @@
             button.textContent = labels[currentLang];
         }
         function readAloud() {
-            let msg = new SpeechSynthesisUtterance(document.getElementById("quote").innerText);
-            msg.lang = { zh: 'zh-CN', en: 'en-US', fr: 'fr-FR', ar: 'ar-SA' }[currentLang];
+            // let msg = new SpeechSynthesisUtterance(document.getElementById("quote").innerText);
+            // msg.lang = { zh: 'zh-CN', en: 'en-US', fr: 'fr-FR', ar: 'ar-SA' }[currentLang];
 
-            let voices = speechSynthesis.getVoices();
-            msg.voice = voices.find(voice => voice.lang === msg.lang) || voices[0];
+            // let voices = speechSynthesis.getVoices();
+            // msg.voice = voices.find(voice => voice.lang === msg.lang) || voices[0];
 
-            speechSynthesis.speak(msg);
+            // speechSynthesis.speak(msg);
+            const verseStr = currentVerse[currentLang];
+            var title = verseStr.verse;
+            const audioPlayer = document.getElementById("audioPlayer");
+            audioPlayer.src = title + ".mp3";
+            audioPlayer.play()
+                .then(() => console.log("播放成功"))
+                .catch(error => console.error("播放失败", error));
         }
 
         if (synth.onvoiceschanged !== undefined) {

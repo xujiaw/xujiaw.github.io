@@ -66,6 +66,28 @@
             font-size: 1rem;
         }
 
+        .select-box {
+    padding: 12px 25px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    appearance: none;
+    text-align: center;
+    width: auto; /* 确保宽度自适应 */
+    max-width: 200px; /* 可设置最大宽度，避免显示不完全 */
+}
+
+.select-box option {
+    background-color: rgba(0, 0, 0, 0.8); /* 设置选项的背景色 */
+    color: white; /* 选项文本颜色 */
+    font-size: 1rem;
+}
+
         .button {
             display: flex;
             align-items: center;
@@ -106,10 +128,10 @@
         <p id="quote">经文内容</p>
         <div class="buttons">
             <select id="languageSelect" class="select-box" onchange="changeLanguage()">
-                <option value="ar">عربي</option>
-                <option value="en">English</option>
-                <option value="fr">Français</option>
-                <option value="zh">中文</option>
+                <option value="ar">عربي</option> <!-- 阿拉伯语 -->
+                <option value="en">English</option> <!-- 英语 -->
+                <option value="ur">اردو</option> <!-- 乌尔都语 -->
+                <option value="ta">தமிழ்</option> <!-- 泰米尔语 -->
             </select>
             <button class="button" onclick="readAloud()"> 朗读 🔊 </button>
         </div>
@@ -117,23 +139,27 @@
 
     <script>
         const verses = [{
-    "zh": {
-      "verse": "Al-Fatihah：1-2",
-      "quote": "奉至仁至慈的真主之名。\n一切赞颂，全归真主，全世界的主。"
-    },
-    "en": {
-      "verse": "Al-Fatihah：1-2",
-      "quote": "In the name of Allah, the Most Gracious, the Most Merciful.\nAll praise is due to Allah, the Lord of all the worlds."
-    },
-    "fr": {
-      "verse": "Al-Fatihah：1-2",
-      "quote": "Au nom d'Allah, le Tout Miséricordieux, le Très Miséricordieux.\nLouange à Allah, Seigneur de l'univers."
-    },
-    "ar": {
-      "verse": "Al-Fatihah：1-2",
-      "quote": "بِسْمِ اللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ\nالْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ"
-    }
-  }];
+            "zh": {
+                "verse": "Al-Fatihah：1-2",
+                "quote": "奉至仁至慈的真主之名。\n一切赞颂，全归真主，全世界的主。"
+            },
+            "en": {
+                "verse": "Al-Fatihah：1-2",
+                "quote": "In the name of Allah, the Most Gracious, the Most Merciful.\nAll praise is due to Allah, the Lord of all the worlds."
+            },
+            "ur": {
+                "verse": "Al-Fatihah：1-2",
+                "quote": "اللہ کے نام سے جو بڑا مہربان نہایت رحم والا ہے۔\nتمام تعریف اللہ کے لیے ہے جو تمام جہانوں کا پروردگار ہے۔"
+            },
+            "ta": {
+                "verse": "Al-Fatihah：1-2",
+                "quote": "அல்லாஹ்வின் பெயரில், மிகவும் அருள்மிகு, மிகுந்த கருணை உடையவர்.\nஅனைத்து புகழும் அல்லாஹ்விற்கு தான், அனைத்துக் கோணங்களின் ஆண்டவராக இருக்கின்றவர்."
+            },
+            "ar": {
+                "verse": "Al-Fatihah：1-2",
+                "quote": "بِسْمِ اللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ\nالْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ"
+            }
+        }];
 
         let currentLang = 'ar';
         let currentVerse = verses[Math.floor(Math.random() * verses.length)];
@@ -157,7 +183,8 @@
             const labels = {
                 zh: "朗读 🔊",
                 en: "Read Aloud 🔊",
-                fr: "Lire à haute voix 🔊",
+                ur: "پڑھ کر سنائیں 🔊",
+                ta: "உயரக் கூர்ந்து வாசிக்க 🔊",
                 ar: "اقرأ بصوت عالٍ 🔊"
             };
             button.textContent = labels[currentLang];
@@ -173,7 +200,7 @@
             const verseStr = currentVerse[currentLang];
             var title = verseStr.verse;
             const audioPlayer = document.getElementById("audioPlayer");
-            audioPlayer.src = "./" + title + ".mp3";
+            audioPlayer.src = title + ".mp3";
             audioPlayer.play()
                 .then(() => console.log("播放成功"))
                 .catch(error => console.error("播放失败", error));

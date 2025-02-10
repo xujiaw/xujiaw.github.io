@@ -20,5 +20,49 @@
             "verse": "Al-Fatihah：1-2",
             "quote": "بِسْمِ اللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ\nالْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ"
         }
+    },
+    {
+        "zh": {
+            "verse": "Al-Baqarah：2",
+            "quote": "这部经典，其中毫无可疑，它是敬畏者的向导。"
+        },
+        "en": {
+            "verse": "Al-Baqarah：2",
+            "quote": "This is the Book about which there is no doubt, a guidance for those conscious of Allah."
+        },
+        "ur": {
+            "verse": "Al-Baqarah：2",
+            "quote": "یہ وہ کتاب ہے جس میں کوئی شک نہیں، پرہیزگاروں کے لئے ہدایت ہے۔"
+        },
+        "ta": {
+            "verse": "Al-Baqarah：2",
+            "quote": "இது எந்த சந்தேகமுமற்ற ஒரு வேதாகமம். பக்திமிகுந்தவர்களுக்கு வழிகாட்டியாகும்."
+        },
+        "ar": {
+            "verse": "Al-Baqarah：2",
+            "quote": "ذَٰلِكَ ٱلْكِتَٰبُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ"
+        }
+    },
+    {
+        "zh": {
+            "verse": "Al-Imran：139",
+            "quote": "你们不要灰心，不要忧愁，你们是优胜的，如果你们是信士。"
+        },
+        "en": {
+            "verse": "Al-Imran：139",
+            "quote": "So do not weaken and do not grieve, and you will be superior if you are [true] believers."
+        },
+        "ur": {
+            "verse": "Al-Imran：139",
+            "quote": "پس نہ کمزور پڑو اور نہ غم کرو، اگر تم ایمان والے ہو تو تمہی غالب ہو۔"
+        },
+        "ta": {
+            "verse": "Al-Imran：139",
+            "quote": "நீங்கள் தளர்ந்து விடாதீர்கள், நீங்கள் கவலையடைய வேண்டாம். நீங்கள் விசுவாசிகள் எனில் நீங்கள் மேலோங்கி நிற்பீர்கள்."
+        },
+        "ar": {
+            "verse": "Al-Imran：139",
+            "quote": "وَلَا تَهِنُوا وَلَا تَحْزَنُوا وَأَنتُمُ ٱلْأَعْلَوْنَ إِن كُنتُم مُّؤْمِنِينَ"
+        }
     }
 ]

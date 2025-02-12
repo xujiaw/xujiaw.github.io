@@ -190,9 +190,13 @@
             const verseStr = currentVerse[currentLang];
             var title = verseStr.verse;
             const audioPlayer = document.getElementById("audioPlayer");
-            audioPlayer.src = "./audio/" + title + ".mp3";
+            if (currentLang === 'en') {
+                audioPlayer.src = "./en_audio/" + title + ".mp3";
+            } else {
+                audioPlayer.src = "./ar_audio/" + title + ".mp3";
+            }
             audioPlayer.play()
-                .then(() => console.log("播放成功"))
+                .then(() => console.log("播放成功"))ene
                 .catch(error => console.error("播放失败", error));
         }
 
